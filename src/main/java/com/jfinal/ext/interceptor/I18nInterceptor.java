@@ -18,7 +18,7 @@ package com.jfinal.ext.interceptor;
 import java.util.Locale;
 
 import com.jfinal.aop.Interceptor;
-import com.jfinal.core.ActionInvocation;
+import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.StrKit;
 import com.jfinal.render.Render;
@@ -33,7 +33,7 @@ public class I18nInterceptor implements Interceptor {
     private String skipFlagPara = "skipi18n";
 
     @Override
-    public void intercept(ActionInvocation ai) {
+    public void intercept(Invocation ai) {
         Controller controller = ai.getController();
         String language = controller.getAttr(languagePara);
         if (StrKit.isBlank(language)) {
@@ -44,7 +44,8 @@ public class I18nInterceptor implements Interceptor {
             country = controller.getPara(countryPara, defaultCountry);
         }
         Locale locale = new Locale(language, country);
-        controller.setLocaleToCookie(locale);
+//        TODO
+//        controller.setLocaleToCookie(locale);
         controller.setAttr(localePara, locale);
         ai.invoke();
         if (Boolean.TRUE.equals(ai.getController().getAttr(skipFlagPara))) {
