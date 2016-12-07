@@ -18,13 +18,13 @@ package com.jfinal.ext.plugin.jms;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 
 public class ReceiveResolverFactory {
 
     public static final String RESOLVER_SUFFIX = ".resolver";
 
-    protected final Logger logger = Logger.getLogger(getClass());
+    protected final Log logger = Log.getLog(getClass());
 
     private Map<Integer, ReceiveResolver> receiveResolverMap = new HashMap<Integer, ReceiveResolver>();
     private Map<String, Integer> messageTypeMap;

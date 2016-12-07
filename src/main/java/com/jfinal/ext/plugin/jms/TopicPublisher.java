@@ -25,13 +25,12 @@ import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
 
+import com.jfinal.log.Log;
 import org.apache.activemq.ActiveMQConnectionFactory;
-
-import com.jfinal.log.Logger;
 
 public class TopicPublisher {
 
-    protected final Logger logger = Logger.getLogger(getClass());
+    protected final Log logger = Log.getLog(getClass());
 
     protected String serverUrl;
     protected String username;

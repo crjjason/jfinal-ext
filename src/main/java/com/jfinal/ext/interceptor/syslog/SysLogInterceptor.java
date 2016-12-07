@@ -21,7 +21,7 @@ import java.util.Set;
 
 import com.google.common.collect.Maps;
 import com.jfinal.aop.Interceptor;
-import com.jfinal.core.ActionInvocation;
+import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 import com.jfinal.ext.kit.ServletKit;
 import com.jfinal.kit.StrKit;
@@ -41,7 +41,7 @@ public class SysLogInterceptor implements Interceptor {
     }
 
     @Override
-    public void intercept(ActionInvocation ai) {
+    public void intercept(Invocation ai) {
         String actionKey = ai.getActionKey();
         Controller c = ai.getController();
         LogConfig log = acitonLogs.get(actionKey);

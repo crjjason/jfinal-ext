@@ -23,7 +23,6 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 
 /**
- * 基于权限的访问控制处理器，非单例模式运行。
  * @author dafei
  *
  */

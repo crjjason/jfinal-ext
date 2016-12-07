@@ -22,7 +22,6 @@ import com.jfinal.handler.Handler;
 
 public class CacheControlHeaderHandler extends Handler {
 	private static final int invalidExpirationTime = -1;
-	/**缓存分钟数*/
 	private final int expirationMinutes;
 	public final int expires_hour = 60;
 	public final int expires_day = expires_hour * 24;

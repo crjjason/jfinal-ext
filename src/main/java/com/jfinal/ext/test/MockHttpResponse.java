@@ -106,19 +106,16 @@ public class MockHttpResponse implements HttpServletResponse {
         return null;
     }
 
-    @Override
     public String getHeader(String arg0) {
 
         return null;
     }
 
-    @Override
     public Collection<String> getHeaderNames() {
 
         return null;
     }
 
-    @Override
     public Collection<String> getHeaders(String arg0) {
 
         return null;
@@ -137,7 +134,6 @@ public class MockHttpResponse implements HttpServletResponse {
         return null;
     }
 
-    @Override
     public int getStatus() {
 
         return 0;

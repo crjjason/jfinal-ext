@@ -85,8 +85,8 @@ public class JedisKit {
 
     /***
      * query one Object from Redis with key
-     * 
-     * @param key
+     *
+     * @param<T> key
      *            using it get value from key-value database
      * @return the Object which implements Serializable
      */

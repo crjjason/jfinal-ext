@@ -231,8 +231,7 @@ public class Reflect {
 
     /**
      * 
-     * TODO:(简单描述方法作用). <br/>
-     * 
+     *
      * @author kid create 2013-8-29
      * @param clazz
      * @param name

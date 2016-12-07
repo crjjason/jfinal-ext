@@ -20,7 +20,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import com.jfinal.ext.kit.KeyLabel;
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 import com.jfinal.render.Render;
 import com.jfinal.render.RenderException;
 
@@ -29,7 +29,7 @@ public class FunshionChartsRender extends Render implements FunshionChartsConsta
 
     private static final String CONTENT_TYPE = "text/html;charset=" + getEncoding();
 
-    protected final Logger logger = Logger.getLogger(getClass());
+    protected final Log logger = Log.getLog(getClass());
 
     private List<KeyLabel> pies;
 
@@ -38,7 +38,6 @@ public class FunshionChartsRender extends Render implements FunshionChartsConsta
     private String flashPath;
 
     /**
-     * 报表数据源
      */
     private List<List<String>> chartList;
 
@@ -50,29 +49,23 @@ public class FunshionChartsRender extends Render implements FunshionChartsConsta
 
     private List<String> labels;
     /**
-     * 报表div的高度
      */
     private String height;
     /**
-     * 报表div的宽度
      */
     private String width;
     /**
-     * 报表flash存放路径
      */
     private String flashFile;
     /**
-     * 报表页面的标题
      */
     private String title;
 
     /**
-     * 饼图 ，单线图
      */
     private PieChart superChart = new PieChart();
 
     /**
-     * 多线图
      */
     private GraphChart superMultiCharts = new GraphChart();
 

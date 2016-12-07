@@ -8,7 +8,7 @@ import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.plugin.tablebind.AutoTableBindPlugin;
-import com.jfinal.plugin.activerecord.tx.TxByRegex;
+import com.jfinal.plugin.activerecord.tx.TxByMethodRegex;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.ViewType;
 
@@ -32,7 +32,7 @@ public class Config extends JFinalConfig {
 
     @Override
     public void configInterceptor(Interceptors me) {
-        me.add(new TxByRegex(".*.save"));
+        me.add(new TxByMethodRegex(".*.save"));
     }
 
     @Override

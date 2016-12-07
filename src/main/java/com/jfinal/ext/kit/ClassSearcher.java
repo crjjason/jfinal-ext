@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013, kidzhou 周磊 (zhouleib1412@gmail.com)
+ * Copyright (c) 2011-2013, kidzhou (zhouleib1412@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@ package com.jfinal.ext.kit;
 
 import com.google.common.collect.Lists;
 import com.jfinal.kit.PathKit;
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +28,7 @@ import java.util.jar.JarFile;
 
 public class ClassSearcher {
 
-    protected static final Logger LOG = Logger.getLogger(ClassSearcher.class);
+    protected static final Log LOG = Log.getLog(ClassSearcher.class);
 
     private String classpath = PathKit.getRootClassPath();
 
@@ -60,17 +60,16 @@ public class ClassSearcher {
     }
 
     /**
-     * @param baseDirName    查找的文件夹路径
-     * @param targetFileName 需要查找的文件名
+     * @param baseDirName
+     * @param targetFileName
      */
     private static List<String> findFiles(String baseDirName, String targetFileName) {
         /**
-         * 算法简述： 从某个给定的需查找的文件夹出发，搜索该文件夹的所有子文件夹及文件， 若为文件，则进行匹配，匹配成功则加入结果集，若为子文件夹，则进队列。 队列不空，重复上述操作，队列为空，程序结束，返回结果。
          */
         List<String> classFiles = Lists.newArrayList();
         File baseDir = new File(baseDirName);
         if (!baseDir.exists() || !baseDir.isDirectory()) {
-            LOG.error("search error：" + baseDirName + "is not a dir！");
+            LOG.error("search error:" + baseDirName + "is not a dir!");
         } else {
             String[] files = baseDir.list();
             for (int i = 0; i < files.length; i++) {
@@ -94,10 +93,9 @@ public class ClassSearcher {
     }
 
     /**
-     * 通配符匹配
      *
-     * @param pattern  通配符模式
-     * @param fileName 待匹配的字符串
+     * @param pattern
+     * @param fileName
      */
     private static boolean wildcardMatch(String pattern, String fileName) {
         int patternLength = pattern.length();
@@ -107,7 +105,6 @@ public class ClassSearcher {
         for (int patternIndex = 0; patternIndex < patternLength; patternIndex++) {
             ch = pattern.charAt(patternIndex);
             if (ch == '*') {
-                // 通配符星号*表示可以匹配任意多个字符
                 while (strIndex < strLength) {
                     if (wildcardMatch(pattern.substring(patternIndex + 1), fileName.substring(strIndex))) {
                         return true;
@@ -115,10 +112,8 @@ public class ClassSearcher {
                     strIndex++;
                 }
             } else if (ch == '?') {
-                // 通配符问号?表示匹配任意一个字符
                 strIndex++;
                 if (strIndex > strLength) {
-                    // 表示str中已经没有字符匹配?了。
                     return false;
                 }
             } else {
@@ -145,13 +140,12 @@ public class ClassSearcher {
     }
 
     /**
-     * 查找jar包中的class
      */
     private List<String> findjarFiles(String baseDirName) {
         List<String> classFiles = Lists.newArrayList();
         File baseDir = new File(baseDirName);
         if (!baseDir.exists() || !baseDir.isDirectory()) {
-            LOG.error("file search error:" + baseDirName + " is not a dir！");
+            LOG.error("file search error:" + baseDirName + " is not a dir!");
         } else {
             File[] files = baseDir.listFiles();
             for (File file : files) {

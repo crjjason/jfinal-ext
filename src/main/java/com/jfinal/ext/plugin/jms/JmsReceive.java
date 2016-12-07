@@ -15,14 +15,15 @@
  */
 package com.jfinal.ext.plugin.jms;
 
+import com.jfinal.log.Log;
+
 import javax.jms.Message;
 import javax.jms.ObjectMessage;
 
-import com.jfinal.log.Logger;
 
 public class JmsReceive implements IMessageHandler {
     
-    protected final Logger logger = Logger.getLogger(getClass());
+    protected final Log logger = Log.getLog(getClass());
     
     private ReceiveResolverFactory receiveResolverFactory;
 

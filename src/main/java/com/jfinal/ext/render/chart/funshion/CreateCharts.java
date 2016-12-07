@@ -19,11 +19,11 @@ import java.util.List;
 
 import com.jfinal.ext.kit.KeyLabel;
 import com.jfinal.kit.StrKit;
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 
 public class CreateCharts {
 
-    protected static final Logger LOG = Logger.getLogger(CreateCharts.class);
+    protected static final Log LOG = Log.getLog(CreateCharts.class);
 
     // private static Configuration cfg;
 
@@ -39,19 +39,16 @@ public class CreateCharts {
     // } catch (IOException e) {
     // logger.error("init freemaker error", e);
     // }
-    // //设置FreeMarker模版文件的位置
     // }
 
     /**
-     * 创建报表柱状图,曲线图,区域图
-     * 
+     *
      * @param chart
-     *            报表实体
-     * @return 创建的字符串
+     * @return
      */
     public static String createChart(PieChart chart) {
         String strXML = "";
-        // if (StrKit.isBlank(chart.getFltPath())) { //freemaker模板为空调用list数据源生成xml
+        // if (StrKit.isBlank(chart.getFltPath())) {
         strXML += "<chart caption='" + chart.getCaption() + "' xAxisName='" + chart.getXAxisName() + "' yAxisName='" + chart.getYAxisName()
                 + "' showValues='1' formatNumberScale='1' baseFontSize ='12' bgColor='#CCCCCC'  rotateYAxisName='0' >";
 

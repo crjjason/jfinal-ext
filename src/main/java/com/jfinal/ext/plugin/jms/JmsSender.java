@@ -18,10 +18,10 @@ package com.jfinal.ext.plugin.jms;
 import java.io.Serializable;
 import java.util.Map;
 
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 
 public class JmsSender {
-    protected final Logger logger = Logger.getLogger(getClass());
+    protected final Log logger = Log.getLog(getClass());
 
     Map<String, QueueProducer> queueProducers;
     Map<String, TopicPublisher> topicPublishers;

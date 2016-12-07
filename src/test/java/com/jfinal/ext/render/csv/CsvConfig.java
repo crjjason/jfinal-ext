@@ -7,7 +7,7 @@ import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
-import com.jfinal.log.Log4jLoggerFactory;
+import com.jfinal.log.Log4jLogFactory;
 
 public class CsvConfig extends JFinalConfig {
 
@@ -18,7 +18,7 @@ public class CsvConfig extends JFinalConfig {
     @Override
     public void configConstant(Constants me) {
         me.setDevMode(true);
-        me.setLoggerFactory(new Log4jLoggerFactory());
+        me.setLogFactory(new Log4jLogFactory());
     }
 
     @Override

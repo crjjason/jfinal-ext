@@ -652,8 +652,8 @@ Upload excel file ,digist data to model and presmist model.
    Used in any class to generate logger
 
    #+BEGIN_SRC java
-     protected final Logger logger = Logger.getLogger(getClass());
-     protected final static Logger logger = Logger.getLogger(Object.class);
+     protected final Log logger = Log.getLog(getClass());
+     protected final static Log logger = Log.getLog(Object.class);
    #+END_SRC
 ** jfd
 

@@ -21,38 +21,30 @@ import com.jfinal.ext.kit.KeyLabel;
 
 public class PieChart {
     /**
-     * 标题
      */
     private String caption;
     /**
-     * x坐标说明
      */
     private String xAxisName;
     /**
-     * y坐标说明
      */
     private String yAxisName;
     /**
-     * 数据源
      */
     private List<KeyLabel> list;
 
     /**
-     * FLASH位置
      */
     private String charUrl;
     /**
-     * FLASH宽
      */
     private String charWidth;
 
     /**
-     * FLASH高
      */
     private String charHigh;
 
     /**
-     * freemaker模板路径
      */
     private String fltPath;
 

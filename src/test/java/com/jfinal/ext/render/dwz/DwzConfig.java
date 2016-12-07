@@ -7,7 +7,7 @@ import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
-import com.jfinal.plugin.activerecord.tx.TxByRegex;
+import com.jfinal.plugin.activerecord.tx.TxByMethodRegex;
 
 public class DwzConfig extends JFinalConfig {
 
@@ -29,7 +29,7 @@ public class DwzConfig extends JFinalConfig {
 
     @Override
     public void configInterceptor(Interceptors me) {
-        me.add(new TxByRegex(".*.save"));
+        me.add(new TxByMethodRegex(".*.save"));
     }
 
     @Override

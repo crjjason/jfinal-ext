@@ -19,7 +19,7 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 import com.jfinal.aop.Interceptor;
-import com.jfinal.core.ActionInvocation;
+import com.jfinal.aop.Invocation;
 import com.jfinal.ext.render.exception.ExceptionRender;
 import com.jfinal.render.RenderFactory;
 
@@ -48,7 +48,7 @@ public class ExceptionInterceptor implements Interceptor {
     }
 
     @Override
-    public void intercept(ActionInvocation ai) {
+    public void intercept(Invocation ai) {
         try {
             ai.invoke();
         } catch (Exception e) {

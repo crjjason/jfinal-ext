@@ -19,7 +19,6 @@ import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthenticatedException;
 
 /**
- * 访客访问控制处理器
  * @author dafei
  *
  */

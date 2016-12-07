@@ -52,13 +52,11 @@ public class MockHttpRequest implements HttpServletRequest {
         this.body = body;
     }
 
-    @Override
     public boolean authenticate(HttpServletResponse arg0) throws IOException, ServletException {
 
         return false;
     }
 
-    @Override
     public AsyncContext getAsyncContext() {
 
         return null;
@@ -115,7 +113,6 @@ public class MockHttpRequest implements HttpServletRequest {
         return 0;
     }
 
-    @Override
     public DispatcherType getDispatcherType() {
 
         return null;
@@ -206,13 +203,11 @@ public class MockHttpRequest implements HttpServletRequest {
         return new String[] { para.get(key) };
     }
 
-    @Override
     public Part getPart(String arg0) throws IOException, ServletException {
 
         return null;
     }
 
-    @Override
     public Collection<Part> getParts() throws IOException, ServletException {
 
         return null;
@@ -332,7 +327,6 @@ public class MockHttpRequest implements HttpServletRequest {
         return 0;
     }
 
-    @Override
     public ServletContext getServletContext() {
 
         return null;
@@ -362,13 +356,11 @@ public class MockHttpRequest implements HttpServletRequest {
         return null;
     }
 
-    @Override
     public boolean isAsyncStarted() {
 
         return false;
     }
 
-    @Override
     public boolean isAsyncSupported() {
 
         return false;
@@ -410,12 +402,10 @@ public class MockHttpRequest implements HttpServletRequest {
         return false;
     }
 
-    @Override
     public void login(String arg0, String arg1) throws ServletException {
 
     }
 
-    @Override
     public void logout() throws ServletException {
 
     }
@@ -439,13 +429,11 @@ public class MockHttpRequest implements HttpServletRequest {
         para.put(key, val);
     }
 
-    @Override
     public AsyncContext startAsync() {
 
         return null;
     }
 
-    @Override
     public AsyncContext startAsync(ServletRequest arg0, ServletResponse arg1) {
 
         return null;

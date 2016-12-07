@@ -17,14 +17,14 @@ package com.jfinal.ext.render.chart.amchart;
 
 import com.jfinal.ext.kit.KeyLabel;
 import com.jfinal.kit.StrKit;
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 
 import java.util.List;
 
 public class Creater {
 
     public static boolean isFormat = true;
-    protected static final Logger LOG = Logger.getLogger(Creater.class);
+    protected static final Log LOG = Log.getLog(Creater.class);
 
     private Creater() {
     }
@@ -86,11 +86,9 @@ public class Creater {
     }
 
     /**
-     * 生成x轴描述
-     * 
+     *
      * @param strXML
      * @param seriesNames
-     *            描述的list
      * @return
      */
     private static StringBuffer appendSeries(StringBuffer strXML, List<String> seriesNames) {
@@ -134,10 +132,8 @@ public class Creater {
     }
 
     /**
-     * 生成缩进
-     * 
+     *
      * @param level
-     *            缩进的级别（1级4个空格）
      * @return
      * 
      */
@@ -153,8 +149,7 @@ public class Creater {
     }
 
     /**
-     * 生成换行符 Description: <br>
-     * 
+     *
      * @return
      */
     private static StringBuffer newLine() {

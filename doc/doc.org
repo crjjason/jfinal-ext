@@ -620,8 +620,8 @@ public class DefaultLogProccesor implements LogProccesor {
    在任何类中使用，生成logger
 
    #+BEGIN_SRC java
-     protected final Logger logger = Logger.getLogger(getClass());
-     protected final static Logger logger = Logger.getLogger(Object.class);
+     protected final Log logger = Log.getLog(getClass());
+     protected final static Log logger = Log.getLog(Object.class);
    #+END_SRC
 ** jfd
    在Model中使用，生成dao

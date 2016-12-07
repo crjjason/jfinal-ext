@@ -26,7 +26,7 @@ import com.jfinal.core.Controller;
 import com.jfinal.ext.kit.ModelExt;
 import com.jfinal.ext.kit.Reflect;
 import com.jfinal.kit.StrKit;
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
@@ -40,7 +40,7 @@ import com.jfinal.plugin.activerecord.TableMapping;
  */
 public class PageInfoKit {
 
-    protected final static Logger LOG = Logger.getLogger(PageInfoKit.class);
+    protected final static Log LOG = Log.getLog(PageInfoKit.class);
 
     private static final String OPERATOR_SUFFIX = "_op";
 
@@ -63,7 +63,6 @@ public class PageInfoKit {
                     Table relationTableinfo = TableMapping.me().getTable(modelClass);
                     Map<String, Class<?>> relationColumnTypeMap = Reflect.on(relationTableinfo).get("columnTypeMap");
                     set = relationColumnTypeMap.keySet();
-                    // 如果设置了前缀表明或者字段冲突的时候
                     for (String item : set) {
                         if (pageInfoInterceptor.useColumnLabel()
                                 || columnConflict(item, model, modelClass, pageInfoInterceptor.relations())) {
@@ -209,7 +208,7 @@ public class PageInfoKit {
         List<Filter> filters = Lists.newArrayList();
         for (Entry<String, String> entry : filter.entrySet()) {
             String key = entry.getKey();
-            if (key.endsWith(OPERATOR_SUFFIX)) { // 操作符
+            if (key.endsWith(OPERATOR_SUFFIX)) {
                 continue;
             }
             String operater = filter.get(key + OPERATOR_SUFFIX);

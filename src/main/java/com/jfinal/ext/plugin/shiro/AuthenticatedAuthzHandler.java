@@ -19,9 +19,6 @@ import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthenticatedException;
 
 /**
- * 已认证通过访问控制处理器
- * 单例模式运行。
- *
  * @author dafei
  *
  */

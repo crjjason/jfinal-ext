@@ -7,11 +7,11 @@ import com.jfinal.core.Controller;
 import com.jfinal.ext.kit.KeyLabel;
 import com.jfinal.ext.render.chart.amchart.AmChartsRender;
 import com.jfinal.ext.render.chart.funshion.FunshionChartsRender;
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 
 public class ChartController extends Controller {
 
-    protected final Logger logger = Logger.getLogger(getClass());
+    protected final Log logger = Log.getLog(getClass());
 
     public void fpie() {
         List<KeyLabel> pies = new ArrayList<KeyLabel>();

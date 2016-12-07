@@ -29,8 +29,6 @@ import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Record;
 
 /**
- * 该类是把数据转化成csv字符串做了简要的封装 List headers是显示数据每列的属性，建议使用字符 List data数据，单个元素格式可以为Array，list，map，model，record List columns
- * 表示需要显示的数据，如果data是Array与list，输入希望显示列的下标即可 如果data是map，model，record，输入希望显示列的key值即可。
  */
 public class CsvUtil {
 
@@ -40,15 +38,12 @@ public class CsvUtil {
     }
 
     /**
-     * 将文本头与数据共同转成csv字符串
+     *
      * 
      * @param headers
-     *            列属性
      * @param data
-     *            数据
      * @param columns
-     *            需要显示列的key值
-     * @return csv字符串
+     * @return
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public static String createCSV(List headers, List data, List columns) {
@@ -62,7 +57,7 @@ public class CsvUtil {
 
         Iterator itr = data.iterator();
         while (itr.hasNext()) {
-            Object obj = itr.next(); // 将数据添加到csv字符串
+            Object obj = itr.next();
             Class cls = obj.getClass();
             if (cls != null && cls.isArray()) {
                 if (obj != null) {
@@ -72,13 +67,13 @@ public class CsvUtil {
                             createCol(strOut, objs[i]);
                             strOut.append(",");
                         }
-                        strOut = strOut.deleteCharAt(strOut.length() - 1); // 去点多余逗号
+                        strOut = strOut.deleteCharAt(strOut.length() - 1);
                         strOut.append("\n");
                     }
                 }
             } else if (obj instanceof List) {
                 List objlist = (List) obj;
-                if (null == columns || columns.isEmpty()) { // 如果没有限制，默认全部显示
+                if (null == columns || columns.isEmpty()) {
                     listToCSV(strOut, objlist);
                 } else {
                     for (int i = 0; i < columns.size(); i++) {
@@ -90,7 +85,7 @@ public class CsvUtil {
                 }
             } else if (obj instanceof Map) {
                 Map objmap = (Map) obj;
-                if (null == columns || columns.isEmpty()) { // 如果没有限制，默认全部显示
+                if (null == columns || columns.isEmpty()) {
                     Set keyset = objmap.keySet();
                     for (Object key : keyset) {
                         createCol(strOut, objmap.get(key));
@@ -108,8 +103,8 @@ public class CsvUtil {
                 }
             } else if (obj instanceof Model) {
                 Model objmodel = (Model) obj;
-                if (null == columns || columns.isEmpty()) { // 如果没有限制，默认全部显示
-                    Set<Entry<String, Object>> entries = objmodel.getAttrsEntrySet();
+                if (null == columns || columns.isEmpty()) {
+                    Set<Entry<String, Object>> entries = objmodel._getAttrsEntrySet();
                     for (Entry entry : entries) {
                         createCol(strOut, entry.getValue());
                         strOut.append(",");
@@ -127,7 +122,7 @@ public class CsvUtil {
             } else if (obj instanceof Record) {
                 Record objrecord = (Record) obj;
                 Map<String, Object> map = objrecord.getColumns();
-                if (null == columns || columns.isEmpty()) { // 如果没有限制，默认全部显示
+                if (null == columns || columns.isEmpty()) {
                     Set<String> keys = map.keySet();
                     for (String key : keys) {
                         createCol(strOut, objrecord.get(key));
@@ -158,15 +153,13 @@ public class CsvUtil {
     }
 
     /**
-     * 把单纯的集合转化成csv字符串
-     * 
+     *
      * @param strOut
      *            StringBuffer
      * @param list
-     *            数据
      */
     public static void listToCSV(StringBuffer strOut, List<?> list) {
-        if (null != list && !list.isEmpty()) { // 如果文本不为空则添加到csv字符串中
+        if (null != list && !list.isEmpty()) {
             for (short i = 0; i < list.size(); i++) {
                 createCol(strOut, list.get(i));
                 strOut.append(",");
@@ -176,7 +169,6 @@ public class CsvUtil {
         }
     }
 
-    // 把单个元素转化
     public static void createCol(StringBuffer strOut, Object obj) {
         if (obj != null) {
             strOut.append("\"");
@@ -253,7 +245,6 @@ public class CsvUtil {
         return content;
     }
 
-    // 特殊字符的转换 "\t" -> "\\t"
     public static String replace(String original, String pattern, String replace) {
         final int len = pattern.length();
         int found = original.indexOf(pattern);

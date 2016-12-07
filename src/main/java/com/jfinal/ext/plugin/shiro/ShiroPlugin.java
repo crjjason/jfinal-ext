@@ -37,7 +37,6 @@ import com.jfinal.core.Controller;
 import com.jfinal.plugin.IPlugin;
 
 /**
- * Shiro插件，启动时加载所有Shiro访问控制注解。
  * @author dafei
  *
  */
@@ -47,27 +46,23 @@ public class ShiroPlugin implements IPlugin {
 	private static final String SLASH = "/";
 
 	/**
-	 * Shiro的几种访问控制注解
 	 */
 	private static final Class<? extends Annotation>[] AUTHZ_ANNOTATION_CLASSES = new Class[] {
 			RequiresPermissions.class, RequiresRoles.class, RequiresUser.class,
 			RequiresGuest.class, RequiresAuthentication.class };
 
 	/**
-	 * 路由设定
 	 */
 	private final Routes routes;
 
 	/**
-	 * 构造函数
-	 * @param routes 路由设定
+	 * @param routes
 	 */
 	public ShiroPlugin(Routes routes){
 		this.routes = routes;
 	}
 
 	/**
-	 * 停止插件
 	 */
 	@Override
     public boolean stop() {
@@ -75,54 +70,40 @@ public class ShiroPlugin implements IPlugin {
 	}
 
 	/**
-	 * 启动插件
 	 */
 	@Override
     public boolean start() {
 		Set<String> excludedMethodName = buildExcludedMethodName();
 		ConcurrentMap<String, AuthzHandler> authzMaps = new ConcurrentHashMap<String, AuthzHandler>();
-		//逐个访问所有注册的Controller，解析Controller及action上的所有Shiro注解。
-		//并依据这些注解，actionKey提前构建好权限检查处理器。
 		for (Entry<String, Class<? extends Controller>> entry : routes
 				.getEntrySet()) {
 			Class<? extends Controller> controllerClass = entry.getValue();
 
 			String controllerKey = entry.getKey();
 
-			// 获取Controller的所有Shiro注解。
 			List<Annotation> controllerAnnotations = getAuthzAnnotations(controllerClass);
-			// 逐个遍历方法。
 			Method[] methods = controllerClass.getMethods();
 			for (Method method : methods) {
-				//排除掉Controller基类的所有方法，并且只关注没有参数的Action方法。
 				if (!excludedMethodName.contains(method.getName())
 						&& method.getParameterTypes().length == 0) {
-					//若该方法上存在ClearShiro注解，则对该action不进行访问控制检查。
 					if(isClearShiroAnnotationPresent(method)){
 						continue;
 					}
-					//获取方法的所有Shiro注解。
 					List<Annotation> methodAnnotations = getAuthzAnnotations(method);
-					//依据Controller的注解和方法的注解来生成访问控制处理器。
 					AuthzHandler authzHandler = createAuthzHandler(
 							controllerAnnotations, methodAnnotations);
-					//生成访问控制处理器成功。
 					if (authzHandler != null) {
-						//构建ActionKey，参考ActionMapping中实现
 						String actionKey = createActionKey(controllerClass, method, controllerKey);
-						//添加映射
 						authzMaps.put(actionKey, authzHandler);
 					}
 				}
 			}
 		}
-		//注入到ShiroKit类中。ShiroKit类以单例模式运行。
 		ShiroKit.init(authzMaps);
 		return true;
 	}
 
 	/**
-	 * 从Controller方法中构建出需要排除的方法列表
 	 * @return
 	 */
 	private Set<String> buildExcludedMethodName() {
@@ -136,31 +117,25 @@ public class ShiroPlugin implements IPlugin {
 	}
 
 	/**
-	 * 依据Controller的注解和方法的注解来生成访问控制处理器。
-	 * @param controllerAnnotations  Controller的注解
-	 * @param methodAnnotations 方法的注解
-	 * @return 访问控制处理器
+	 * @param controllerAnnotations
+	 * @param methodAnnotations
+	 * @return
 	 */
 	private AuthzHandler createAuthzHandler(
 			List<Annotation> controllerAnnotations,
 			List<Annotation> methodAnnotations) {
 
-		//没有注解
 		if (controllerAnnotations.size() == 0 && methodAnnotations.size() == 0) {
 			return null;
 		}
-		//至少有一个注解
 		List<AuthzHandler> authzHandlers = new ArrayList<AuthzHandler>(5);
 		for (int index = 0; index < 5; index++) {
 			authzHandlers.add(null);
 		}
 
-		// 逐个扫描注解，若是相应的注解则在相应的位置赋值。
 		scanAnnotation(authzHandlers, controllerAnnotations);
-		// 逐个扫描注解，若是相应的注解则在相应的位置赋值。函数的注解优先级高于Controller
 		scanAnnotation(authzHandlers, methodAnnotations);
 
-		// 去除空值
 		List<AuthzHandler> finalAuthzHandlers = new ArrayList<AuthzHandler>();
 		for (AuthzHandler a : authzHandlers) {
 			if (a != null) {
@@ -168,18 +143,14 @@ public class ShiroPlugin implements IPlugin {
 			}
 		}
 		authzHandlers = null;
-		// 存在多个，则构建组合AuthzHandler
 		if (finalAuthzHandlers.size() > 1) {
 			return new CompositeAuthzHandler(finalAuthzHandlers);
 		}
-		// 一个的话直接返回
 		return finalAuthzHandlers.get(0);
 	}
 
 	/**
-	 * 逐个扫描注解，若是相应的注解则在相应的位置赋值。
-	 * 注解的处理是有顺序的，依次为RequiresRoles，RequiresPermissions，
-	 * RequiresAuthentication，RequiresUser，RequiresGuest
+	 * RequiresAuthentication,RequiresUser,RequiresGuest
 	 *
 	 * @param authzArray
 	 * @param annotations
@@ -205,7 +176,6 @@ public class ShiroPlugin implements IPlugin {
 	}
 
 	/**
-	 * 构建actionkey，参考ActionMapping中的实现。
 	 *
 	 * @param controllerClass
 	 * @param method
@@ -235,7 +205,6 @@ public class ShiroPlugin implements IPlugin {
 	}
 
 	/**
-	 * 返回该方法的所有访问控制注解
 	 *
 	 * @param method
 	 * @return
@@ -252,9 +221,8 @@ public class ShiroPlugin implements IPlugin {
 	}
 
 	/**
-	 * 返回该Controller的所有访问控制注解
 	 *
-	 * @param method
+	 * @param
 	 * @return
 	 */
 	private List<Annotation> getAuthzAnnotations(
@@ -269,7 +237,6 @@ public class ShiroPlugin implements IPlugin {
 		return annotations;
 	}
 	/**
-	 * 该方法上是否有ClearShiro注解
 	 * @param method
 	 * @return
 	 */

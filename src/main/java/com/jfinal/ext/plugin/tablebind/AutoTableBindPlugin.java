@@ -20,7 +20,7 @@ import com.jfinal.ext.kit.ClassSearcher;
 import com.jfinal.ext.kit.Reflect;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.StrKit;
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.DbKit;
 import com.jfinal.plugin.activerecord.IDataSourceProvider;
@@ -32,7 +32,7 @@ import java.util.List;
 
 public class AutoTableBindPlugin extends ActiveRecordPlugin {
 
-    protected final Logger log = Logger.getLogger(getClass());
+    protected final Log log = Log.getLog(getClass());
 
     @SuppressWarnings("rawtypes")
     private List<Class<? extends Model>> excludeClasses = Lists.newArrayList();
@@ -117,8 +117,6 @@ public class AutoTableBindPlugin extends ActiveRecordPlugin {
     }
 
     /**
-     * 添加需要扫描的包，默认为扫描所有包
-     *
      * @param packages
      * @return
      */

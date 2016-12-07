@@ -116,10 +116,10 @@ public class ModelExt<M extends ModelExt<M>> extends Model<M> {
             if (!tableInfo.hasColumnLabel(deleteColumnLabel)) {
                 throw new ActiveRecordException("The deleteColumnLabel (" + deleteColumnLabel + ") is not exist");
             }
-            String pKey = tableInfo.getPrimaryKey();
-            if (id == null)
+            String[] pKey = tableInfo.getPrimaryKey();
+            if (id == null && pKey.length == 1)
                 throw new ActiveRecordException("You can't update model without Primary Key.");
-            String sql = "update "+tableInfo.getName()+" set "+deleteColumnLabel+" = 1 where "+pKey+" = ?";
+            String sql = "update "+tableInfo.getName()+" set "+deleteColumnLabel+" = 1 where "+pKey[0]+" = ?";
             result = Db.update(sql,id)>=1;
         } else {
             result = super.deleteById(id);
@@ -131,8 +131,8 @@ public class ModelExt<M extends ModelExt<M>> extends Model<M> {
     }
 
     public int deleteAll() {
-        String primaryKey = TableMapping.me().getTable(clazz).getPrimaryKey();
-        return Db.update("delete from " + tableName() + " where " + primaryKey + "=?");
+        String[] primaryKey = TableMapping.me().getTable(clazz).getPrimaryKey();
+        return Db.update("delete from " + tableName() + " where " + primaryKey[0] + "=?");
     }
 
     public int deleteByColumn(String column, Object value) {
@@ -149,7 +149,7 @@ public class ModelExt<M extends ModelExt<M>> extends Model<M> {
             if (!tableInfo.hasColumnLabel(deleteColumnLabel)) {
                 throw new ActiveRecordException("The deleteColumnLabel (" + deleteColumnLabel + ") is not exist");
             }
-            String pKey = tableInfo.getPrimaryKey();
+            String[] pKey = tableInfo.getPrimaryKey();
             sql+= "update "+tableInfo.getName()+" set "+deleteColumnLabel+" = 1";
         }else{
             sql+= "delete from " + tableInfo.getName() ;
@@ -212,10 +212,10 @@ public class ModelExt<M extends ModelExt<M>> extends Model<M> {
         String foreignKey = child.foreignKey();
         Class<? extends Model> childModel = child.model();
         String childTableName = TableMapping.me().getTable(childModel).getName();
-        String primaryKey = TableMapping.me().getTable(clazz).getPrimaryKey();
+        String[] primaryKey = TableMapping.me().getTable(clazz).getPrimaryKey();
         try {
             return childModel.newInstance().find("select * from " + childTableName + " where " + foreignKey + "= ?",
-                    get(primaryKey));
+                    get(primaryKey[0]));
         } catch (Exception e) {
             throw new ActiveRecordException(e.getMessage(), e);
         }
@@ -227,10 +227,10 @@ public class ModelExt<M extends ModelExt<M>> extends Model<M> {
         String foreignKey = parent.foreignKey();
         Class<? extends Model> parentModel = parent.model();
         String parentTableName = TableMapping.me().getTable(parentModel).getName();
-        String primaryKey = TableMapping.me().getTable(clazz).getPrimaryKey();
+        String[] primaryKey = TableMapping.me().getTable(clazz).getPrimaryKey();
         try {
             return (M) parentModel.newInstance().findFirst(
-                    "select * from " + parentTableName + " where " + foreignKey + "= ?", get(primaryKey));
+                    "select * from " + parentTableName + " where " + foreignKey + "= ?", get(primaryKey[0]));
         } catch (Exception e) {
             throw new ActiveRecordException(e.getMessage(), e);
         }

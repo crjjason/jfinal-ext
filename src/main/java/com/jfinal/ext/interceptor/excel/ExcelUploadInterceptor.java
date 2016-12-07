@@ -16,15 +16,15 @@
 package com.jfinal.ext.interceptor.excel;
 
 import com.google.common.collect.Lists;
+import com.jfinal.aop.Invocation;
 import com.jfinal.aop.PrototypeInterceptor;
-import com.jfinal.core.ActionInvocation;
 import com.jfinal.core.Controller;
 import com.jfinal.ext.kit.Reflect;
 import com.jfinal.ext.kit.excel.PoiImporter;
 import com.jfinal.ext.kit.excel.Rule;
 import com.jfinal.ext.kit.excel.filter.RowFilter;
 import com.jfinal.kit.StrKit;
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Model;
 
 import java.lang.reflect.ParameterizedType;
@@ -33,7 +33,7 @@ import java.util.List;
 
 public abstract class ExcelUploadInterceptor<M extends Model<?>> extends PrototypeInterceptor {
 
-    protected final Logger LOG = Logger.getLogger(getClass());
+    protected final Log LOG = Log.getLog(getClass());
 
     private Class clazz;
 
@@ -50,7 +50,7 @@ public abstract class ExcelUploadInterceptor<M extends Model<?>> extends Prototy
     }
 
     @SuppressWarnings({"rawtypes"})
-    public void doIntercept(ActionInvocation ai) {
+    public void doIntercept(Invocation ai) {
         rule = configRule();
         Controller controller = ai.getController();
         List<Model<?>> list = PoiImporter.processSheet(controller.getFile().getFile(), rule, clazz);

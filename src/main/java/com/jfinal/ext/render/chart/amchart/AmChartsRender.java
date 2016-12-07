@@ -20,7 +20,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import com.jfinal.ext.kit.KeyLabel;
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 import com.jfinal.render.Render;
 import com.jfinal.render.RenderException;
 
@@ -33,39 +33,28 @@ public class AmChartsRender extends Render implements AmChartsConstans {
 
     private static final String CONTENT_TYPE = "text/html;charset=" + getEncoding();
 
-    private Logger logger = Logger.getLogger(AmChartsRender.class);
+    private Log logger = Log.getLog(AmChartsRender.class);
 
-    /** 数据源 */
     private List<?> data;
 
-    /** 数据描述 */
     private List<String> series;
 
-    /** 饼图数据 */
     private List<KeyLabel> pies;
 
-    /** 报表div的高度 */
     private int height;
 
-    /** 报表div的宽度 */
     private int width;
 
-    /** amcharts文件存放路径 */
     private String path = PATH;
 
-    /** 报表flash存放路径 */
     private String flashFile;
 
-    /** 报表settings配置文件存放的路径 */
     private String settingsFile;
 
-    /** 报表页面的标题 */
     private String title;
 
-    /** 报表数据字符串 */
     private String chartXml;
 
-    /** 图形类型 */
     private String type;
 
     public AmChartsRender(String type, int height, int width, String flashFile, String settingsFile) {
@@ -167,11 +156,11 @@ public class AmChartsRender extends Render implements AmChartsConstans {
         AmChartsRender.globalWidth = globalWidth;
     }
 
-    public Logger getLogger() {
+    public Log getLog() {
         return logger;
     }
 
-    public void setLogger(Logger logger) {
+    public void setLog(Log logger) {
         this.logger = logger;
     }
 

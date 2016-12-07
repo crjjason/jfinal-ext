@@ -21,7 +21,6 @@ import java.util.Map;
 import com.jfinal.core.Controller;
 
 /**
- * 日志处理器
  */
 public interface LogProcessor {
 

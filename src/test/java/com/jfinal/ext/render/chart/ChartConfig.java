@@ -7,7 +7,7 @@ import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
-import com.jfinal.log.Log4jLoggerFactory;
+import com.jfinal.log.Log4jLogFactory;
 
 public class ChartConfig extends JFinalConfig {
 
@@ -19,8 +19,8 @@ public class ChartConfig extends JFinalConfig {
     public void configConstant(Constants me) {
         me.setEncoding("utf-8");
         me.setDevMode(true);
-        me.setLoggerFactory(new Log4jLoggerFactory());
-        // me.setLoggerFactory(new LogbackLoggerFactory());
+        me.setLogFactory(new Log4jLogFactory());
+        // me.setLogFactory(new LogbackLogFactory());
     }
 
     @Override

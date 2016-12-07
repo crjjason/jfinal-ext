@@ -1,6 +1,6 @@
 package com.jfinal.ext.plugin.config;
 
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 import org.junit.BeforeClass;
 
 import java.util.concurrent.TimeUnit;
@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class TestConfig {
     @BeforeClass
     public static void init() {
-        Logger.init();
+//        Log.init();
         ConfigPlugin configPlugin = new ConfigPlugin(".*.txt").reload(false);
         configPlugin.start();
     }

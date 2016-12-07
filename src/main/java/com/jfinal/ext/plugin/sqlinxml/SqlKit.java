@@ -22,11 +22,11 @@ import java.util.Map;
 
 import com.jfinal.ext.kit.JaxbKit;
 import com.jfinal.kit.PathKit;
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 
 public class SqlKit {
 
-    protected static final Logger LOG = Logger.getLogger(SqlKit.class);
+    protected static final Log LOG = Log.getLog(SqlKit.class);
 
     private static Map<String, String> sqlMap;
 
